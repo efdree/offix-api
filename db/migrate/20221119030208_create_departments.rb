@@ -3,7 +3,7 @@ class CreateDepartments < ActiveRecord::Migration[7.0]
     create_table :departments do |t|
       t.string :name
       t.text :description
-      t.integer :employee_count
+      t.integer :employees_count, default: 0
 
       t.timestamps
     end
