@@ -65,9 +65,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_014640) do
   create_table "feedbacks", force: :cascade do |t|
     t.text "body"
     t.integer "employee_id", null: false
+    t.string "feedbackable_type", null: false
+    t.integer "feedbackable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_feedbacks_on_employee_id"
+    t.index ["feedbackable_type", "feedbackable_id"], name: "index_feedbacks_on_feedbackable"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -3,6 +3,7 @@ class CreateFeedbacks < ActiveRecord::Migration[7.0]
     create_table :feedbacks do |t|
       t.text :body
       t.references :employee, null: false, foreign_key: true
+      t.references :feedbackable, polymorphic: true, null: false
 
       t.timestamps
     end
