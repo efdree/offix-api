@@ -1,5 +1,11 @@
 class EmployeesController < ApplicationController
+  skip_before_action :require_login!, only: :create
   before_action :set_employee, only: %i[show update destroy]
+
+  def index
+    @employees = Employee.all
+    render json: @employees
+  end
 
   def show
     render json: @employee
@@ -18,8 +24,8 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    if @employee.update(department_params)
-      render json: @employee
+    if @employee.update(employee_params)
+      render json: @employee, status: :ok
     else
       render json: @employee.errors, status: :unprocessable_entity
     end
@@ -36,7 +42,7 @@ class EmployeesController < ApplicationController
   end
 
   def employee_params
-    params.require(:employee).permit(:name, :nationality, :email, :position, :department_id, :birth_date, :manager_id, :role, :avatar, :password)
+    params.permit(:name, :nationality, :email, :position, :department_id, :birth_date, :manager_id, :role, :avatar, :password)
   end
 
 end

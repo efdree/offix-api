@@ -1,6 +1,12 @@
 class DepartmentsController < ApplicationController
+  #skip_before_action :require_login!
   before_action :set_department, only: %i[show update destroy]
 
+  def index
+    @departments = Department.all
+    render json: @departments
+  end
+  
   def show
     render json: @department
   end

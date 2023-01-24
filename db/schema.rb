@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_01_17_014640) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,24 +52,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_014640) do
 
   create_table "employees", force: :cascade do |t|
     t.string "name"
-    t.string "nationality"
     t.string "email"
+    t.string "nationality"
     t.string "position"
     t.date "birth_date"
-    t.integer "department_id", null: false
-    t.integer "manager_id"
+    t.string "password_digest"
+    t.string "token"
+    t.bigint "department_id", null: false
+    t.bigint "manager_id"
     t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_employees_on_department_id"
+    t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["manager_id"], name: "index_employees_on_manager_id"
+    t.index ["token"], name: "index_employees_on_token", unique: true
   end
 
   create_table "feedbacks", force: :cascade do |t|
     t.text "body"
-    t.integer "employee_id", null: false
+    t.bigint "employee_id", null: false
     t.string "feedbackable_type", null: false
-    t.integer "feedbackable_id", null: false
+    t.bigint "feedbackable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_feedbacks_on_employee_id"
