@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :employees do
+    #/employees/employee_id/feedbacks
+    resources :feedbacks
+  end
+  resources :departments do
+    #/departments/department_id/feedbacks
+    resources :feedbacks
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :feedbacks
+
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 end
