@@ -47,6 +47,9 @@ gem "bootsnap", require: false
 
 gem 'active_model_serializers', '~> 0.10.13'
 
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem "rack-cors"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
