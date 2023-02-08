@@ -1,0 +1,18 @@
+database:
+  - name: offix
+    databaseName: offix
+    user: offix
+
+services:
+  - type: web
+    name: offix
+    env: ruby
+    buildCommand: "./bin/render_build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: offix
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false

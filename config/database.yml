@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: offix_reloaded_production
-  username: offix_reloaded
-  password: <%= ENV["OFFIX_RELOADED_DATABASE_PASSWORD"] %>
+  # database: offix_reloaded_production
+  # username: offix_reloaded
+  # password: <%= ENV["OFFIX_RELOADED_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
